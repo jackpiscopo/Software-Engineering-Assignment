@@ -6,7 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="CPS2002Assignment" />
+        <module name="Software-Engineering-Assignment" />
       </profile>
     </annotationProcessing>
   </component>
