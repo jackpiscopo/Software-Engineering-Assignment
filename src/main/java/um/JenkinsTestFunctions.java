@@ -8,4 +8,8 @@ public class JenkinsTestFunctions {
     public int timesThree(int num) {
         return num*3;
     }
+
+    public int timesFour(int num) {
+        return num*4;
+    }
 }

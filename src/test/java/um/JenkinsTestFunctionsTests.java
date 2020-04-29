@@ -17,4 +17,10 @@ public class JenkinsTestFunctionsTests {
         JenkinsTestFunctions func = new JenkinsTestFunctions();
         assertEquals(3, func.timesThree(1));
     }
+
+    @Test
+    public void timesFourReturnsCorrectAnswer() {
+        JenkinsTestFunctions func = new JenkinsTestFunctions();
+        assertEquals(4, func.timesFour(1));
+    }
 }
