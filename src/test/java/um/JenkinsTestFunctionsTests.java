@@ -23,4 +23,22 @@ public class JenkinsTestFunctionsTests {
         JenkinsTestFunctions func = new JenkinsTestFunctions();
         assertEquals(4, func.timesFour(1));
     }
+
+    @Test
+    public void timesFiveReturnsCorrectAnswer() {
+        JenkinsTestFunctions func = new JenkinsTestFunctions();
+        assertEquals(5, func.timesFive(1));
+    }
+
+    @Test
+    public void timesSixReturnsCorrectAnswer() {
+        JenkinsTestFunctions func = new JenkinsTestFunctions();
+        assertEquals(6, func.timesSix(1));
+    }
+
+    @Test
+    public void timesSevenReturnsCorrectAnswer() {
+        JenkinsTestFunctions func = new JenkinsTestFunctions();
+        assertEquals(7, func.timesSeven(1));
+    }
 }
