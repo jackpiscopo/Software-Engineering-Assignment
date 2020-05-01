@@ -61,7 +61,7 @@ public class Map {
 
     }
 
-    //public char getTileType(int x, int y) {
-
-    //}
+    public char getTileType(int x, int y) {
+        return 'g';
+    }
 }

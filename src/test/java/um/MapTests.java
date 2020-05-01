@@ -29,4 +29,13 @@ public class MapTests {
         Map map = new Map();
         assertFalse(map.setMapSize(4, 4));
     }
+
+    @Test
+    public void getTileTypeReturnsGrassOrWater() {
+        Map map = new Map();
+        map.setMapSize(5, 5);
+        map.generate();
+        char tile = map.getTileType(2, 3);
+        assertTrue(tile == 'g' || tile == 'w');
+    }
 }
