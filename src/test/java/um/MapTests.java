@@ -1,0 +1,32 @@
+package um;
+
+import org.junit.Test;
+
+import static junit.framework.TestCase.*;
+
+public class MapTests {
+
+    @Test
+    public void mapSizeSetWithValidSize() {
+        Map map = new Map();
+        assertTrue(map.setMapSize(5, 5));
+    }
+
+    @Test
+    public void mapSizeSetWithNotEqualSize() {
+        Map map = new Map();
+        assertFalse(map.setMapSize(5, 6));
+    }
+
+    @Test
+    public void mapSizeSetWithSizeTooLarge() {
+        Map map = new Map();
+        assertFalse(map.setMapSize(51, 51));
+    }
+
+    @Test
+    public void mapSizeSetWithSizeTooSmall() {
+        Map map = new Map();
+        assertFalse(map.setMapSize(4, 4));
+    }
+}
