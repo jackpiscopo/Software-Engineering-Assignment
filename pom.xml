@@ -102,6 +102,7 @@
                       <phase>test</phase>
                       <goals>
                           <goal>report</goal>
+                          <goal>jacoco:prepare-agent test jacoco:report</goal>
                       </goals>
                       <configuration>
                           <!-- Sets the path to the file which contains the execution data. -->
