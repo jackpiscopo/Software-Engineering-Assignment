@@ -39,13 +39,13 @@ public class Map {
 
             for(i=0;i<size;i++) {
                 for(j=0;j<size;j++) {
-                    int randomNumber = (int) (Math.random() * 2 + 1);
+                    int randomNumber = (int) (Math.random() * ((2 - 1) + 1) + 1);
 
                     switch (randomNumber) {
-                        case 0:
+                        case 1:
                             mapArray[i][j] = 'g';
                             break;
-                        case 1:
+                        case 2:
                             mapArray[i][j] = 'w';
                             break;
                     }

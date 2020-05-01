@@ -2,6 +2,8 @@ package um;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static junit.framework.TestCase.*;
 
 public class MapTests {
