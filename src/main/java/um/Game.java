@@ -14,7 +14,7 @@ public class Game {
         int playersCount = 0;
         int mapSize = 0;
 
-        boolean validAnswer = false;
+        boolean validAnswer;
 
         System.out.println("Welcome to the game.");
         System.out.println("Game Setup: ");
@@ -26,8 +26,6 @@ public class Game {
             validAnswer = game.setNumPlayers(playersCount);
 
         } while (!validAnswer);
-
-        validAnswer = false;
 
         do {
             int minMapSize = 0;
@@ -44,11 +42,8 @@ public class Game {
                 minMapSize = 8;
             }
 
-            if (mapSize >= minMapSize && mapSize <= 50) {
-                validAnswer = true;
-            } else {
-                System.out.println("ERROR: Invalid map size.");
-            }
+            validAnswer = game.setMapSize(mapSize, minMapSize);
+
         } while (!validAnswer);
     }
 
@@ -63,6 +58,11 @@ public class Game {
     }
 
     public boolean setMapSize(int mapSize, int minMapSize) {
-        return true;
+        if (mapSize >= minMapSize && mapSize <= 50) {
+            return true;
+        } else {
+            System.out.println("ERROR: Invalid map size.");
+            return false;
+        }
     }
 }
