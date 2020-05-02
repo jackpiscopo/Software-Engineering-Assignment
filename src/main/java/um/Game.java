@@ -4,9 +4,12 @@ import java.util.Scanner;
 
 public class Game {
 
-    public static void main(String args[]) {
+    Player[] players;
+
+    public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        Game game = new Game();
 
         int playersCount = 0;
         int mapSize = 0;
@@ -20,11 +23,8 @@ public class Game {
             System.out.println("Number of players (2-8): ");
             playersCount = sc.nextInt();
 
-            if(playersCount >= 2 && playersCount <= 8) {
-                validAnswer = true;
-            } else {
-                System.out.println("ERROR: Invalid number of players.");
-            }
+            validAnswer = game.setNumPlayers(playersCount);
+
         } while (!validAnswer);
 
         validAnswer = false;
@@ -50,5 +50,15 @@ public class Game {
                 System.out.println("ERROR: Invalid map size.");
             }
         } while (!validAnswer);
+    }
+
+    public boolean setNumPlayers(int n) {
+        if(n >= 2 && n <= 8) {
+            players = new Player[n];
+            return true;
+        } else {
+            System.out.println("ERROR: Invalid number of players.");
+            return false;
+        }
     }
 }
