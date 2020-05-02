@@ -13,6 +13,12 @@ public class GameTests {
     }
 
     @Test
+    public void setNumPlayersReturnsFalseWhenTooHigh() {
+        Game game = new Game();
+        assertFalse(game.setNumPlayers(9));
+    }
+
+    @Test
     public void setNumPlayersReturnsFalseWhenZero() {
         Game game = new Game();
         assertFalse(game.setNumPlayers(0));
