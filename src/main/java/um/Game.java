@@ -73,10 +73,18 @@ public class Game {
     public void startGame() {
         int i=0;
 
+        Map map = new Map();
+        map.generate();
+
         // Set random starting positions
         for(i=0;i<Array.getLength(players);i++) {
-            int x = (int) (Math.random() * (mapSize + 1));
-            int y = (int) (Math.random() * (mapSize + 1));
+            int x=0;
+            int y=0;
+
+            do {
+                x = (int) (Math.random() * (mapSize + 1));
+                y = (int) (Math.random() * (mapSize + 1));
+            } while (map.getTileType(x, y) != 'g');
 
             Position position = new Position(x, y);
             System.out.println("Position for player "+i+" is ("+x+" "+y+")");
