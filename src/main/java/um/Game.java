@@ -45,6 +45,8 @@ public class Game {
             validAnswer = game.setMapSize(mapSize, minMapSize);
 
         } while (!validAnswer);
+
+
     }
 
     public boolean setNumPlayers(int n) {

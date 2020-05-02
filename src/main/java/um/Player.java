@@ -23,4 +23,8 @@ public class Player {
                 break;
         }
     }
+
+    public boolean setPosition(Position p) {
+        return true;
+    }
 }
