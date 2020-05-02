@@ -1,5 +1,9 @@
 package um;
 
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Scanner;
 
@@ -90,6 +94,27 @@ public class Game {
             System.out.println("Position for player "+i+" is ("+x+" "+y+")");
             players[i] = new Player();
             players[i].setPosition(position);
+        }
+    }
+
+    public void generateHTMLFiles() {
+        int i=0;
+
+        for(i=0;i<Array.getLength(players);i++) {
+            File htmlTemplateFile = new File("../../html/template.html");
+            String htmlString = null;
+            try {
+                htmlString = FileUtils.readFileToString(htmlTemplateFile);
+                String playerNumber = Integer.toString(i);
+                String gameTable = "";
+                htmlString = htmlString.replace("$PlayerNumber", playerNumber);
+                htmlString = htmlString.replace("$GameTable", gameTable);
+                String newFileName = "map_player_"+ (i + 1);
+                File newHtmlFile = new File("../../html/"+newFileName);
+                FileUtils.writeStringToFile(newHtmlFile, htmlString);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
