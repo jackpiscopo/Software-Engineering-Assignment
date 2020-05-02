@@ -25,6 +25,8 @@ public class Player {
     }
 
     public boolean setPosition(Position p) {
+        // to add checks
+        position = p;
         return true;
     }
 }

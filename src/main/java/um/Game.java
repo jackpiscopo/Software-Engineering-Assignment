@@ -1,10 +1,13 @@
 package um;
 
+import java.lang.reflect.Array;
 import java.util.Scanner;
 
 public class Game {
 
     Player[] players;
+
+    static int mapSize = 0;
 
     public static void main(String[] args) {
 
@@ -12,7 +15,6 @@ public class Game {
         Game game = new Game();
 
         int playersCount = 0;
-        int mapSize = 0;
 
         boolean validAnswer;
 
@@ -46,7 +48,7 @@ public class Game {
 
         } while (!validAnswer);
 
-
+        game.startGame();
     }
 
     public boolean setNumPlayers(int n) {
@@ -65,6 +67,21 @@ public class Game {
         } else {
             System.out.println("ERROR: Invalid map size.");
             return false;
+        }
+    }
+
+    public void startGame() {
+        int i=0;
+
+        // Set random starting positions
+        for(i=0;i<Array.getLength(players);i++) {
+            int x = (int) (Math.random() * (mapSize + 1));
+            int y = (int) (Math.random() * (mapSize + 1));
+
+            Position position = new Position(x, y);
+            System.out.println("Position for player "+i+" is ("+x+" "+y+")");
+            players[i] = new Player();
+            players[i].setPosition(position);
         }
     }
 }
