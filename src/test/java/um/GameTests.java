@@ -9,7 +9,7 @@ public class GameTests {
     @Test
     public void setNumPlayersReturnsTrue() {
         Game game = new Game();
-        assertTrue(game.setNumPlayers(1));
+        assertTrue(game.setNumPlayers(2));
     }
 
     @Test
