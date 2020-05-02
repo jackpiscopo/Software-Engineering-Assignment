@@ -51,4 +51,8 @@ public class Game {
             }
         } while (!validAnswer);
     }
+
+    public boolean setNumPlayers(int n) {
+        return true;
+    }
 }
