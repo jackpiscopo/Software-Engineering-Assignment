@@ -61,4 +61,8 @@ public class Game {
             return false;
         }
     }
+
+    public boolean setMapSize(int mapSize, int minMapSize) {
+        return true;
+    }
 }

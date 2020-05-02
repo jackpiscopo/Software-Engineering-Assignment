@@ -29,4 +29,22 @@ public class GameTests {
         Game game = new Game();
         assertFalse(game.setNumPlayers(-1));
     }
+
+    @Test
+    public void setMapSizeReturnsTrue() {
+        Game game = new Game();
+        assertTrue(game.setMapSize(6, 5));
+    }
+
+    @Test
+    public void setMapSizeReturnsFalseWhenSizeLessThanMin() {
+        Game game = new Game();
+        assertFalse(game.setMapSize(4, 5));
+    }
+
+    @Test
+    public void setMapSizeReturnsFalseWhenSizeTooHigh() {
+        Game game = new Game();
+        assertFalse(game.setMapSize(51, 5));
+    }
 }
