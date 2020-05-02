@@ -107,8 +107,8 @@ public class Game {
                 htmlString = FileUtils.readFileToString(htmlTemplateFile);
                 String playerNumber = Integer.toString(i);
                 String gameTable = "";
-                htmlString = htmlString.replace("$PlayerNumber", playerNumber);
-                htmlString = htmlString.replace("$GameTable", gameTable);
+                htmlString = htmlString.replace("$playerNumber", playerNumber);
+                htmlString = htmlString.replace("$gameTable", gameTable);
                 String newFileName = "map_player_"+ (i + 1);
                 File newHtmlFile = new File("../../html/"+newFileName);
                 FileUtils.writeStringToFile(newHtmlFile, htmlString);
