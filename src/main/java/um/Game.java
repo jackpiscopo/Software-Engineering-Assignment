@@ -18,6 +18,8 @@ public class Game {
 
     boolean gameWon = false;
 
+    int turns=1;
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -27,7 +29,9 @@ public class Game {
 
         boolean validAnswer;
 
+        System.out.println("------------------------------------------");
         System.out.println("Welcome to the game.");
+        System.out.println("------------------------------------------");
         System.out.println("Game Setup: ");
 
         do {
@@ -65,6 +69,7 @@ public class Game {
             players = new Player[n];
             return true;
         } else {
+            System.out.println("------------------------------------------");
             System.out.println("ERROR: Invalid number of players.");
             return false;
         }
@@ -74,6 +79,7 @@ public class Game {
         if (mapSize >= minMapSize && mapSize <= 50) {
             return true;
         } else {
+            System.out.println("------------------------------------------");
             System.out.println("ERROR: Invalid map size.");
             return false;
         }
@@ -100,7 +106,7 @@ public class Game {
             } while (map.getTileType(x, y) != 'g');
 
             Position position = new Position(x, y);
-            System.out.println("Position for player "+i+" is ("+x+" "+y+")");
+            //System.out.println("Position for player "+i+" is ("+x+" "+y+")");
             players[i] = new Player();
             players[i].setPosition(position);
             players[i].setUncoveredStartup(mapSize);
@@ -110,12 +116,16 @@ public class Game {
         do {
             generateHTMLFiles();
 
+            System.out.println("------------------------------------------");
+            System.out.println("Turn "+turns);
+
             char direction;
 
             boolean validAnswer = false;
 
             for (i = 0; i < Array.getLength(players); i++) {
                 do {
+                    System.out.println("------------------------------------------");
                     System.out.println("Player " + (i + 1) + " please enter your next move.");
                     System.out.println("(U)p, (D)own, (L)eft, (R)ight");
                     direction = sc.next().charAt(0);
@@ -123,6 +133,7 @@ public class Game {
                     validAnswer = players[i].setNextMove(direction, mapSize);
 
                     if (!validAnswer) {
+                        System.out.println("------------------------------------------");
                         System.out.println("ERROR: Invalid answer.");
                     }
                 } while (!validAnswer);
@@ -152,13 +163,22 @@ public class Game {
                         break;
                 }
             }
+
+            turns++;
         } while(!gameWon);
+
+        System.out.println("------------------------------------------");
+        System.out.println("Game has been won.");
+        System.out.println("Thanks for playing.");
+        System.out.println("------------------------------------------");
     }
 
     public void generateHTMLFiles() {
         int i=0;
         int j=0;
         int k=0;
+
+        String newHTMLFileParent = "";
 
         for(i=0;i<Array.getLength(players);i++) {
             Position playerPosition = players[i].getPosition();
@@ -224,9 +244,16 @@ public class Game {
                 String newFileName = "map_player_"+ (i + 1) +".html";
                 File newHtmlFile = new File("./src/main/html/"+newFileName).getCanonicalFile();
                 FileUtils.writeStringToFile(newHtmlFile, htmlString);
+
+                newHTMLFileParent = newHtmlFile.getParent();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+
+        System.out.println("------------------------------------------");
+        System.out.println("HTML game files have been generated.");
+        System.out.println("Please find the game files at " + newHTMLFileParent + "\\map_player_n.html");
+        System.out.println("Where n is the player number.");
     }
 }
