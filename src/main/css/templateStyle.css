@@ -1,0 +1,121 @@
+@font-face {
+    font-family: 'gameplayregular';
+    src: url('gameplay-webfont.woff2') format('woff2'),
+         url('gameplay-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body {
+    background-color: grey;
+}
+
+.content {
+    width: 50em;
+    min-width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title {
+    font-size: 3em;
+    text-align: center;
+    font-family: gameplayregular;
+}
+
+.activity {
+    font-size: 2em;
+    text-align: center;
+    font-family: gameplayregular;
+
+}
+
+.game-container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.game-table {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+
+.table-row {
+    border: 1px solid black;
+    text-align: center;
+}
+
+.table-data {
+    border: 1px solid black;
+    //padding-left: 1.2em;
+    //padding-right: 1.2em;
+    //padding-top: 1.2em;
+    //padding-bottom: 1.2em;
+    //width: 2%;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+}
+
+.game-tile {
+    width: 100%;
+    padding-top: 100%;
+    display: block;
+}
+
+.green {
+    background-color: green;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.grey {
+    background-color: gray;
+}
+
+.player {
+    background-color: red;
+    border-radius: 22em;
+    width: 75%;
+    height: 75%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.message {
+    position: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    border: 10px solid black;
+    font-size: 3em;
+    font-family: gameplayregular;
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    background-color: grey;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    opacity: 55%;
+    z-index: 3;
+}
