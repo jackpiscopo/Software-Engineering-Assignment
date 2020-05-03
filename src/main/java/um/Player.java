@@ -4,26 +4,47 @@ import java.lang.*;
 
 public class Player {
     private Position position = new Position();
+    private Position nextMove = new Position();
 
     private boolean[][] uncovered;
 
-    public void move(char direction) {
+    public boolean move(char direction, int mapSize) {
         char d = Character.toLowerCase(direction);
+
+        int currentY;
+        int currentX;
 
         switch(d) {
             case 'u':
-                position.setY(position.getY() + 1);
+                currentY = position.getY();
+                if (currentY < (mapSize - 1)) {
+                    position.setY(currentY + 1);
+                    return true;
+                }
                 break;
             case 'd':
-                position.setY(position.getY() - 1);
+                currentY = position.getY();
+                if (currentY >= 1) {
+                    position.setY(currentY - 1);
+                    return true;
+                }
                 break;
             case 'l':
-                position.setX(position.getX() - 1);
+                currentX = position.getX();
+                if (currentX >= 1) {
+                    position.setX(currentX - 1);
+                    return true;
+                }
                 break;
             case 'r':
-                position.setX(position.getX() + 1);
+                currentX = position.getX();
+                if (currentX < (mapSize - 1)) {
+                    position.setX(currentX + 1);
+                    return true;
+                }
                 break;
         }
+        return false;
     }
 
     public boolean setPosition(Position p) {
@@ -51,5 +72,44 @@ public class Player {
 
     public boolean getUncovered(int x, int y) {
         return uncovered[x][y];
+    }
+
+    public boolean setNextMove(char direction, int mapSize) {
+        char d = Character.toLowerCase(direction);
+
+        int currentY = position.getY();
+        int currentX = position.getX();
+
+        switch(d) {
+            case 'u':
+                if (currentY < (mapSize - 1)) {
+                    nextMove.setY(currentY + 1);
+                    nextMove.setX(currentX);
+                    return true;
+                }
+                break;
+            case 'd':
+                if (currentY >= 1) {
+                    nextMove.setY(currentY - 1);
+                    nextMove.setX(currentX);
+                    return true;
+                }
+                break;
+            case 'l':
+                if (currentX >= 1) {
+                    nextMove.setX(currentX - 1);
+                    nextMove.setY(currentY);
+                    return true;
+                }
+                break;
+            case 'r':
+                if (currentX < (mapSize - 1)) {
+                    nextMove.setX(currentX + 1);
+                    nextMove.setY(currentY);
+                    return true;
+                }
+                break;
+        }
+        return false;
     }
 }
