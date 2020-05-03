@@ -10,45 +10,6 @@ public class Player {
 
     private boolean[][] uncovered;
 
-    public boolean move(char direction, int mapSize) {
-        char d = Character.toLowerCase(direction);
-
-        int currentY;
-        int currentX;
-
-        switch(d) {
-            case 'u':
-                currentY = position.getY();
-                if (currentY < (mapSize - 1)) {
-                    position.setY(currentY + 1);
-                    return true;
-                }
-                break;
-            case 'd':
-                currentY = position.getY();
-                if (currentY >= 1) {
-                    position.setY(currentY - 1);
-                    return true;
-                }
-                break;
-            case 'l':
-                currentX = position.getX();
-                if (currentX >= 1) {
-                    position.setX(currentX - 1);
-                    return true;
-                }
-                break;
-            case 'r':
-                currentX = position.getX();
-                if (currentX < (mapSize - 1)) {
-                    position.setX(currentX + 1);
-                    return true;
-                }
-                break;
-        }
-        return false;
-    }
-
     public void setPosition(Position p) {
         position = p;
     }
