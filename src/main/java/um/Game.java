@@ -5,6 +5,7 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
@@ -100,28 +101,58 @@ public class Game {
             System.out.println("Position for player "+i+" is ("+x+" "+y+")");
             players[i] = new Player();
             players[i].setPosition(position);
-            players[i].setUncovered(mapSize);
+            players[i].setUncoveredStartup(mapSize);
+            players[i].setStartPosition(position);
         }
 
-        generateHTMLFiles();
+        boolean gameWon = false;
 
-        char direction;
+        do {
+            generateHTMLFiles();
 
-        boolean validAnswer = false;
+            char direction;
 
-        for(i=0;i<Array.getLength(players);i++) {
-            do {
-                System.out.println("Player " + (i + 1) + " please enter your next move.");
-                System.out.println("(U)p, (D)own, (L)eft, (R)ight");
-                direction = sc.next().charAt(0);
+            boolean validAnswer = false;
 
-                validAnswer = players[i].setNextMove(direction, mapSize);
+            for (i = 0; i < Array.getLength(players); i++) {
+                do {
+                    System.out.println("Player " + (i + 1) + " please enter your next move.");
+                    System.out.println("(U)p, (D)own, (L)eft, (R)ight");
+                    direction = sc.next().charAt(0);
 
-                if(!validAnswer) {
-                    System.out.println("ERROR: Invalid answer.");
+                    validAnswer = players[i].setNextMove(direction, mapSize);
+
+                    if (!validAnswer) {
+                        System.out.println("ERROR: Invalid answer.");
+                    }
+                } while (!validAnswer);
+            }
+
+            for (i = 0; i < Array.getLength(players); i++) {
+                Position nextMove = players[i].getNextMove();
+                int nextMoveX = nextMove.getX();
+                int nextMoveY = nextMove.getY();
+
+                char nextMoveType = map.getTileType(nextMoveX, nextMoveY);
+
+                players[i].setUncovered(nextMoveX, nextMoveY);
+
+                switch (nextMoveType) {
+                    case 'g':
+                        players[i].setPosition(nextMove);
+                        break;
+                    case 'w':
+                        players[i].setPosition(players[i].getStartPosition());
+                        break;
+                    case 't':
+                        players[i].setPosition(nextMove);
+                        players[i].setWinner();
+                        gameWon = true;
+                        generateHTMLFiles();
+                        break;
                 }
-            } while(!validAnswer);
-        }
+            }
+        } while(!gameWon);
     }
 
     public void generateHTMLFiles() {
