@@ -34,7 +34,9 @@ public class Game {
     }
 
     public boolean setNumPlayers(int n) {
+        // If number of players is valid
         if(n >= 2 && n <= 8) {
+            // Create array of n players
             players = new Player[n];
             return true;
         } else {
@@ -45,6 +47,7 @@ public class Game {
     }
 
     public boolean setMapSize(int mapSize, int minMapSize) {
+        // If map size is valid
         if (mapSize >= minMapSize && mapSize <= 50) {
             return true;
         } else {
@@ -62,6 +65,7 @@ public class Game {
 
         boolean validAnswer;
 
+        // Asks user for number of players
         do {
             System.out.println("Number of players (2-8): ");
             playersCount = sc.nextInt();
@@ -70,15 +74,18 @@ public class Game {
 
         } while (!validAnswer);
 
+        // Asks user for map size
         do {
             int minMapSize = 0;
 
+            // If players count is less than 4, min map size is 5
             if (playersCount <= 4) {
                 System.out.println("Map size (5x5)-(50x50): ");
                 mapSize = sc.nextInt();
 
                 minMapSize = 5;
             } else {
+                // If players count is more than 4, min map size is 8
                 System.out.println("Map size (8x8)-(50x50): ");
                 mapSize = sc.nextInt();
 
@@ -98,7 +105,7 @@ public class Game {
         map.setMapSize(mapSize, mapSize);
         map.generate();
 
-        // Set random starting positions
+        // Sets random starting positions
         for(i=0;i<Array.getLength(players);i++) {
             int x=0;
             int y=0;
@@ -126,6 +133,7 @@ public class Game {
 
             boolean validAnswer;
 
+            // Asks for next move for every player
             for (i = 0; i < Array.getLength(players); i++) {
                 do {
                     System.out.println("------------------------------------------");
@@ -149,16 +157,20 @@ public class Game {
 
                 char nextMoveType = map.getTileType(nextMoveX, nextMoveY);
 
+                //Uncovers next move for every player
                 players[i].setUncovered(nextMoveX, nextMoveY);
 
                 switch (nextMoveType) {
                     case 'g':
+                        // If next move is grass, move to next tile
                         players[i].setPosition(nextMove);
                         break;
                     case 'w':
+                        // If next move is water, move to starting position
                         players[i].setPosition(players[i].getStartPosition());
                         break;
                     case 't':
+                        // If next move is treasure, player wins
                         players[i].setPosition(nextMove);
                         players[i].setWinner();
                         gameWon = true;
@@ -187,6 +199,7 @@ public class Game {
             Position playerPosition = players[i].getPosition();
 
             try {
+                // Reads template HTML file to string
                 File htmlTemplateFile = new File("./src/main/html/template.html").getCanonicalFile();
                 String htmlString = null;
 
@@ -195,6 +208,7 @@ public class Game {
 
                 String message = " ";
 
+                // If game is won, set a message for players who won or lost
                 if(gameWon) {
                     if(players[i].getWinner()) {
                         message = "<div class=\"message\">You won!</div>";
@@ -205,41 +219,53 @@ public class Game {
 
                 StringBuilder buffer = new StringBuilder();
 
+                // Builds string for table
                 for(j=0;j<mapSize;j++) {
+                    // Creates a new table row
                     buffer.append("<tr class=\"table-row\">");
                     for(k=0;k<mapSize;k++) {
                         boolean isPlayerPosition = (playerPosition.getX() == k && playerPosition.getY() == j);
 
+                        // Creates a new table cell
                         buffer.append("<td class=\"table-data\">");
 
+                        // If tile has been uncovered or is the player's starting position
                         if(players[i].getUncovered(k, j) || isPlayerPosition) {
 
                             char colour = map.getTileType(k, j);
 
                             switch (colour) {
                                 case 'g':
+                                    // If the tile is grass, sets as green in table
                                     buffer.append("<div class=\"game-tile green\"></div>");
                                     break;
                                 case 'w':
+                                    // If the tile is water, sets as blue in table
                                     buffer.append("<div class=\"game-tile blue\"></div>");
                                     break;
                                 case 't':
+                                    // If the tile is treasure, sets as yellow in table
                                     buffer.append("<div class=\"game-tile yellow\"></div>");
                                     break;
                             }
                         } else {
+                            // If not uncovered or starting position, sets as grey
                             buffer.append("<div class=\"game-tile grey\"></div>");
                         }
 
+                        // If tile is player position, sets player in table
                         if(isPlayerPosition) {
                             buffer.append("<div class=\"player\"></div>");
                         }
 
+                        // Ends table cell
                         buffer.append("</td>");
                     }
+                    // Ends table row
                     buffer.append("</tr>");
                 }
 
+                // Replaces HTML variables with values
                 htmlString = htmlString.replace("$playerNumber", playerNumber);
                 htmlString = htmlString.replace("$message", message);
                 htmlString = htmlString.replace("$gameTable", buffer);

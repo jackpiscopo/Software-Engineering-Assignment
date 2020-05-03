@@ -22,8 +22,10 @@ public class Player {
         int i=0;
         int j=0;
 
+        // Array to mark if tiles are uncovered
         uncovered = new boolean[mapSize][mapSize];
 
+        // Sets all tiles to uncovered
         for(i=0;i<mapSize;i++) {
             for(j=0;j<mapSize;j++) {
                 uncovered[i][j] = false;
@@ -45,7 +47,9 @@ public class Player {
         int currentY = position.getY();
         int currentX = position.getX();
 
+        // Sets next move
         switch(d) {
+            // If up, adjusts x position
             case 'u':
                 if (currentY >= 1) {
                     nextMove.setY(currentY - 1);
@@ -53,6 +57,7 @@ public class Player {
                     return true;
                 }
                 break;
+            // If down, adjusts x position
             case 'd':
                 if (currentY < (mapSize - 1)) {
                     nextMove.setY(currentY + 1);
@@ -60,6 +65,7 @@ public class Player {
                     return true;
                 }
                 break;
+            // If left, adjusts y position
             case 'l':
                 if (currentX >= 1) {
                     nextMove.setX(currentX - 1);
@@ -67,6 +73,7 @@ public class Player {
                     return true;
                 }
                 break;
+            // If right, adjusts y position
             case 'r':
                 if (currentX < (mapSize - 1)) {
                     nextMove.setX(currentX + 1);
