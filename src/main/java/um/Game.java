@@ -77,6 +77,8 @@ public class Game {
     }
 
     public void startGame() {
+        Scanner sc = new Scanner(System.in);
+
         int i=0;
 
         //Map map = new Map();
@@ -102,6 +104,20 @@ public class Game {
         }
 
         generateHTMLFiles();
+
+        char direction;
+
+        boolean validAnswer = false;
+
+        for(i=0;i<Array.getLength(players);i++) {
+            do {
+                System.out.println("Player " + (i + 1) + " please enter your next move.");
+                System.out.println("(U)p, (D)own, (L)eft, (R)ight");
+                direction = sc.next().charAt(0);
+
+                
+            } while(!validAnswer);
+        }
     }
 
     public void generateHTMLFiles() {
