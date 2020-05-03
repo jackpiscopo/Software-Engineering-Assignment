@@ -39,15 +39,12 @@ public class Map {
 
             for(i=0;i<size;i++) {
                 for(j=0;j<size;j++) {
-                    int randomNumber = (int) (Math.random() * ((2 - 1) + 1) + 1);
+                    int randomNumber = (int) (Math.random() * ((10 - 1) + 1) + 1);
 
-                    switch (randomNumber) {
-                        case 1:
-                            mapArray[i][j] = 'g';
-                            break;
-                        case 2:
-                            mapArray[i][j] = 'w';
-                            break;
+                    if(randomNumber >= 1 && randomNumber <= 7) {
+                        mapArray[i][j] = 'g';
+                    } else {
+                        mapArray[i][j] = 'w';
                     }
 
 

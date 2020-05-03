@@ -107,48 +107,52 @@ public class Game {
 
         boolean gameWon = false;
 
-        generateHTMLFiles();
+        do {
+            generateHTMLFiles();
 
-        char direction;
+            char direction;
 
-        boolean validAnswer = false;
+            boolean validAnswer = false;
 
-        for(i=0;i<Array.getLength(players);i++) {
-            do {
-                System.out.println("Player " + (i + 1) + " please enter your next move.");
-                System.out.println("(U)p, (D)own, (L)eft, (R)ight");
-                direction = sc.next().charAt(0);
+            for (i = 0; i < Array.getLength(players); i++) {
+                do {
+                    System.out.println("Player " + (i + 1) + " please enter your next move.");
+                    System.out.println("(U)p, (D)own, (L)eft, (R)ight");
+                    direction = sc.next().charAt(0);
 
-                validAnswer = players[i].setNextMove(direction, mapSize);
+                    validAnswer = players[i].setNextMove(direction, mapSize);
 
-                if(!validAnswer) {
-                    System.out.println("ERROR: Invalid answer.");
-                }
-            } while(!validAnswer);
-        }
-
-        for(i=0;i<Array.getLength(players);i++) {
-            Position nextMove = players[i].getNextMove();
-            int nextMoveX = nextMove.getX();
-            int nextMoveY = nextMove.getY();
-
-            char nextMoveType = map.getTileType(nextMoveX, nextMoveY);
-
-            players[i].setUncovered(nextMoveX, nextMoveY);
-
-            switch (nextMoveType) {
-                case 'g':
-                    players[i].setPosition(nextMove);
-                    break;
-                case 'w':
-                    players[i].setPosition(players[i].getStartPosition());
-                    break;
-                case 't':
-                    players[i].setWinner();
-                    gameWon = true;
-                    break;
+                    if (!validAnswer) {
+                        System.out.println("ERROR: Invalid answer.");
+                    }
+                } while (!validAnswer);
             }
-        }
+
+            for (i = 0; i < Array.getLength(players); i++) {
+                Position nextMove = players[i].getNextMove();
+                int nextMoveX = nextMove.getX();
+                int nextMoveY = nextMove.getY();
+
+                char nextMoveType = map.getTileType(nextMoveX, nextMoveY);
+
+                players[i].setUncovered(nextMoveX, nextMoveY);
+
+                switch (nextMoveType) {
+                    case 'g':
+                        players[i].setPosition(nextMove);
+                        break;
+                    case 'w':
+                        players[i].setPosition(players[i].getStartPosition());
+                        break;
+                    case 't':
+                        players[i].setPosition(nextMove);
+                        players[i].setWinner();
+                        gameWon = true;
+                        generateHTMLFiles();
+                        break;
+                }
+            }
+        } while(!gameWon);
     }
 
     public void generateHTMLFiles() {

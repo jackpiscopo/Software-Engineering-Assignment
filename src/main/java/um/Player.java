@@ -88,15 +88,15 @@ public class Player {
 
         switch(d) {
             case 'u':
-                if (currentY < (mapSize - 1)) {
-                    nextMove.setY(currentY + 1);
+                if (currentY >= 1) {
+                    nextMove.setY(currentY - 1);
                     nextMove.setX(currentX);
                     return true;
                 }
                 break;
             case 'd':
-                if (currentY >= 1) {
-                    nextMove.setY(currentY - 1);
+                if (currentY < (mapSize - 1)) {
+                    nextMove.setY(currentY + 1);
                     nextMove.setX(currentX);
                     return true;
                 }
@@ -125,6 +125,7 @@ public class Player {
 
     public void setStartPosition(Position p) {
         startPosition = p;
+        setUncovered(startPosition.getX(), startPosition.getY());
     }
 
     public Position getStartPosition() {
