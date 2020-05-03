@@ -5,6 +5,7 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
@@ -100,8 +101,11 @@ public class Game {
             System.out.println("Position for player "+i+" is ("+x+" "+y+")");
             players[i] = new Player();
             players[i].setPosition(position);
-            players[i].setUncovered(mapSize);
+            players[i].setUncoveredStartup(mapSize);
+            players[i].setStartPosition(position);
         }
+
+        boolean gameWon = false;
 
         generateHTMLFiles();
 
@@ -121,6 +125,29 @@ public class Game {
                     System.out.println("ERROR: Invalid answer.");
                 }
             } while(!validAnswer);
+        }
+
+        for(i=0;i<Array.getLength(players);i++) {
+            Position nextMove = players[i].getNextMove();
+            int nextMoveX = nextMove.getX();
+            int nextMoveY = nextMove.getY();
+
+            char nextMoveType = map.getTileType(nextMoveX, nextMoveY);
+
+            players[i].setUncovered(nextMoveX, nextMoveY);
+
+            switch (nextMoveType) {
+                case 'g':
+                    players[i].setPosition(nextMove);
+                    break;
+                case 'w':
+                    players[i].setPosition(players[i].getStartPosition());
+                    break;
+                case 't':
+                    players[i].setWinner();
+                    gameWon = true;
+                    break;
+            }
         }
     }
 

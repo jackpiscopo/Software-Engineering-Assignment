@@ -5,6 +5,8 @@ import java.lang.*;
 public class Player {
     private Position position = new Position();
     private Position nextMove = new Position();
+    private Position startPosition = new Position();
+    boolean winner = false;
 
     private boolean[][] uncovered;
 
@@ -57,7 +59,7 @@ public class Player {
         return position;
     }
 
-    public void setUncovered(int mapSize) {
+    public void setUncoveredStartup(int mapSize) {
         int i=0;
         int j=0;
 
@@ -68,6 +70,10 @@ public class Player {
                 uncovered[i][j] = false;
             }
         }
+    }
+
+    public void setUncovered(int x, int y) {
+        uncovered[x][y] = true;
     }
 
     public boolean getUncovered(int x, int y) {
@@ -111,5 +117,25 @@ public class Player {
                 break;
         }
         return false;
+    }
+
+    public Position getNextMove() {
+        return nextMove;
+    }
+
+    public void setStartPosition(Position p) {
+        startPosition = p;
+    }
+
+    public Position getStartPosition() {
+        return startPosition;
+    }
+
+    public void setWinner() {
+        winner = true;
+    }
+
+    public boolean getWinner() {
+        return winner;
     }
 }
