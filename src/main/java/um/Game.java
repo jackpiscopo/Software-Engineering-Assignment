@@ -5,61 +5,30 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
 
-    Player[] players;
+    private Player[] players;
 
-    static int mapSize = 0;
+    private static int mapSize = 0;
 
-    Map map = new Map();
+    private Map map = new Map();
 
-    boolean gameWon = false;
+    private boolean gameWon = false;
 
-    int turns=1;
+    private int turns=1;
 
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
         Game game = new Game();
-
-        int playersCount = 0;
-
-        boolean validAnswer;
 
         System.out.println("------------------------------------------");
         System.out.println("Welcome to the game.");
         System.out.println("------------------------------------------");
         System.out.println("Game Setup: ");
 
-        do {
-            System.out.println("Number of players (2-8): ");
-            playersCount = sc.nextInt();
-
-            validAnswer = game.setNumPlayers(playersCount);
-
-        } while (!validAnswer);
-
-        do {
-            int minMapSize = 0;
-
-            if (playersCount <= 4) {
-                System.out.println("Map size (5x5)-(50x50): ");
-                mapSize = sc.nextInt();
-
-                minMapSize = 5;
-            } else {
-                System.out.println("Map size (8x8)-(50x50): ");
-                mapSize = sc.nextInt();
-
-                minMapSize = 8;
-            }
-
-            validAnswer = game.setMapSize(mapSize, minMapSize);
-
-        } while (!validAnswer);
+        game.setupGame();
 
         game.startGame();
     }
@@ -85,13 +54,47 @@ public class Game {
         }
     }
 
+    public void setupGame() {
+
+        Scanner sc = new Scanner(System.in);
+
+        int playersCount = 0;
+
+        boolean validAnswer;
+
+        do {
+            System.out.println("Number of players (2-8): ");
+            playersCount = sc.nextInt();
+
+            validAnswer = setNumPlayers(playersCount);
+
+        } while (!validAnswer);
+
+        do {
+            int minMapSize = 0;
+
+            if (playersCount <= 4) {
+                System.out.println("Map size (5x5)-(50x50): ");
+                mapSize = sc.nextInt();
+
+                minMapSize = 5;
+            } else {
+                System.out.println("Map size (8x8)-(50x50): ");
+                mapSize = sc.nextInt();
+
+                minMapSize = 8;
+            }
+
+            validAnswer = setMapSize(mapSize, minMapSize);
+
+        } while (!validAnswer);
+    }
+
     public void startGame() {
         Scanner sc = new Scanner(System.in);
 
         int i=0;
 
-        //Map map = new Map();
-        // Fix potential duplicated work for setMapSize
         map.setMapSize(mapSize, mapSize);
         map.generate();
 
@@ -106,7 +109,7 @@ public class Game {
             } while (map.getTileType(x, y) != 'g');
 
             Position position = new Position(x, y);
-            //System.out.println("Position for player "+i+" is ("+x+" "+y+")");
+
             players[i] = new Player();
             players[i].setPosition(position);
             players[i].setUncoveredStartup(mapSize);
@@ -121,7 +124,7 @@ public class Game {
 
             char direction;
 
-            boolean validAnswer = false;
+            boolean validAnswer;
 
             for (i = 0; i < Array.getLength(players); i++) {
                 do {
@@ -200,7 +203,6 @@ public class Game {
                     }
                 }
 
-                String gameTable = "";
                 StringBuilder buffer = new StringBuilder();
 
                 for(j=0;j<mapSize;j++) {
