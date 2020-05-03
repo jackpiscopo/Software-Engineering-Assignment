@@ -59,6 +59,10 @@ public class Map {
             System.out.println("ERROR: Map size not declared.");
         }
 
+        int randomNumber1 = (int) (Math.random() * ((size - 1) + 1));
+        int randomNumber2 = (int) (Math.random() * ((size - 1) + 1));
+
+        mapArray[randomNumber1][randomNumber2] = 't';
     }
 
     public char getTileType(int x, int y) {
