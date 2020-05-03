@@ -116,6 +116,10 @@ public class Game {
                 direction = sc.next().charAt(0);
 
                 validAnswer = players[i].setNextMove(direction, mapSize);
+
+                if(!validAnswer) {
+                    System.out.println("ERROR: Invalid answer.");
+                }
             } while(!validAnswer);
         }
     }
