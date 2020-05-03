@@ -115,7 +115,7 @@ public class Game {
                 System.out.println("(U)p, (D)own, (L)eft, (R)ight");
                 direction = sc.next().charAt(0);
 
-                
+                validAnswer = players[i].setNextMove(direction, mapSize);
             } while(!validAnswer);
         }
     }
