@@ -10,49 +10,8 @@ public class Player {
 
     private boolean[][] uncovered;
 
-    public boolean move(char direction, int mapSize) {
-        char d = Character.toLowerCase(direction);
-
-        int currentY;
-        int currentX;
-
-        switch(d) {
-            case 'u':
-                currentY = position.getY();
-                if (currentY < (mapSize - 1)) {
-                    position.setY(currentY + 1);
-                    return true;
-                }
-                break;
-            case 'd':
-                currentY = position.getY();
-                if (currentY >= 1) {
-                    position.setY(currentY - 1);
-                    return true;
-                }
-                break;
-            case 'l':
-                currentX = position.getX();
-                if (currentX >= 1) {
-                    position.setX(currentX - 1);
-                    return true;
-                }
-                break;
-            case 'r':
-                currentX = position.getX();
-                if (currentX < (mapSize - 1)) {
-                    position.setX(currentX + 1);
-                    return true;
-                }
-                break;
-        }
-        return false;
-    }
-
-    public boolean setPosition(Position p) {
-        // to add checks
+    public void setPosition(Position p) {
         position = p;
-        return true;
     }
 
     public Position getPosition() {
@@ -63,8 +22,10 @@ public class Player {
         int i=0;
         int j=0;
 
+        // Array to mark if tiles are uncovered
         uncovered = new boolean[mapSize][mapSize];
 
+        // Sets all tiles to uncovered
         for(i=0;i<mapSize;i++) {
             for(j=0;j<mapSize;j++) {
                 uncovered[i][j] = false;
@@ -86,7 +47,9 @@ public class Player {
         int currentY = position.getY();
         int currentX = position.getX();
 
+        // Sets next move
         switch(d) {
+            // If up, adjusts x position
             case 'u':
                 if (currentY >= 1) {
                     nextMove.setY(currentY - 1);
@@ -94,6 +57,7 @@ public class Player {
                     return true;
                 }
                 break;
+            // If down, adjusts x position
             case 'd':
                 if (currentY < (mapSize - 1)) {
                     nextMove.setY(currentY + 1);
@@ -101,6 +65,7 @@ public class Player {
                     return true;
                 }
                 break;
+            // If left, adjusts y position
             case 'l':
                 if (currentX >= 1) {
                     nextMove.setX(currentX - 1);
@@ -108,6 +73,7 @@ public class Player {
                     return true;
                 }
                 break;
+            // If right, adjusts y position
             case 'r':
                 if (currentX < (mapSize - 1)) {
                     nextMove.setX(currentX + 1);
