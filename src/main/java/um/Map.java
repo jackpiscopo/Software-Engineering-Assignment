@@ -1,20 +1,10 @@
 package um;
 
-import java.util.ArrayList;
-
 public class Map {
 
     private int size = 0;
 
-    //char[][] mapArray;
-
-    //ArrayList<MapTile> mapArray = new ArrayList<MapTile>();
-    //ArrayList<ArrayList<MapTile>> mapArray;
-
-    char[][] mapArray;
-
-    int i=0;
-    int j=0;
+    private char[][] mapArray;
 
     public boolean setMapSize(int x, int y) {
         if(x == y && x >=5 && x <= 50) {
@@ -26,14 +16,10 @@ public class Map {
     }
 
     public void generate() {
+        int i=0;
+        int j=0;
+
         if(size != 0) {
-            //mapArray = new char[size][size];
-
-            //mapArray = new ArrayList<>(size);
-
-            /*for(i=0;i<size;i++) {
-                mapArray.add(new ArrayList<MapTile>());
-            }*/
 
             mapArray = new char[size][size];
 
@@ -46,10 +32,6 @@ public class Map {
                     } else {
                         mapArray[i][j] = 'w';
                     }
-
-
-                    //MapTile mapTile = new MapTile()
-                    //mapArray.get(i).add()
                 }
             }
         } else {

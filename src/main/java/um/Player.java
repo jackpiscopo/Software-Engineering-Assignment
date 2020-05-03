@@ -49,10 +49,8 @@ public class Player {
         return false;
     }
 
-    public boolean setPosition(Position p) {
-        // to add checks
+    public void setPosition(Position p) {
         position = p;
-        return true;
     }
 
     public Position getPosition() {
