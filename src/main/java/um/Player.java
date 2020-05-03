@@ -6,7 +6,7 @@ public class Player {
     private Position position = new Position();
     private Position nextMove = new Position();
     private Position startPosition = new Position();
-    boolean winner = false;
+    private boolean winner = false;
 
     private boolean[][] uncovered;
 

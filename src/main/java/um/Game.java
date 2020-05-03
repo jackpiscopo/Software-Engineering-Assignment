@@ -16,6 +16,8 @@ public class Game {
 
     Map map = new Map();
 
+    boolean gameWon = false;
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -105,8 +107,6 @@ public class Game {
             players[i].setStartPosition(position);
         }
 
-        boolean gameWon = false;
-
         do {
             generateHTMLFiles();
 
@@ -170,6 +170,16 @@ public class Game {
                 htmlString = FileUtils.readFileToString(htmlTemplateFile);
                 String playerNumber = Integer.toString((i+1));
 
+                String message = " ";
+
+                if(gameWon) {
+                    if(players[i].getWinner()) {
+                        message = "<div class=\"message\">You won!</div>";
+                    } else {
+                        message = "<div class=\"message\">Game over!</div>";
+                    }
+                }
+
                 String gameTable = "";
                 StringBuilder buffer = new StringBuilder();
 
@@ -209,6 +219,7 @@ public class Game {
                 }
 
                 htmlString = htmlString.replace("$playerNumber", playerNumber);
+                htmlString = htmlString.replace("$message", message);
                 htmlString = htmlString.replace("$gameTable", buffer);
                 String newFileName = "map_player_"+ (i + 1) +".html";
                 File newHtmlFile = new File("./src/main/html/"+newFileName).getCanonicalFile();
