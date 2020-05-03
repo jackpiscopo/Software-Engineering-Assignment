@@ -1,19 +1,34 @@
+@font-face {
+    font-family: 'gameplayregular';
+    src: url('gameplay-webfont.woff2') format('woff2'),
+         url('gameplay-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body {
+    background-color: grey;
+}
+
 .content {
     width: 50em;
     min-width: 100px;
     margin-left: auto;
     margin-right: auto;
-    background-color: grey;
 }
 
 .title {
     font-size: 3em;
     text-align: center;
+    font-family: gameplayregular;
 }
 
 .activity {
     font-size: 2em;
     text-align: center;
+    font-family: gameplayregular;
+
 }
 
 .game-container {
@@ -29,7 +44,7 @@
     margin-right: auto;
     table-layout: fixed;
     border-collapse: collapse;
-    border: 1px solid black;
+    border: 2px solid black;
 }
 
 .table-row {
