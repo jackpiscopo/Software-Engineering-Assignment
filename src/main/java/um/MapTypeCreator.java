@@ -2,9 +2,9 @@ package um;
 
 public class MapTypeCreator {
 
-    public MapType setMapType(int type, Map map) {
+    public MapType setMapType(int type) {
 
-        MapTypeCreator creator = findCreatorForType(type, map);
+        MapTypeCreator creator = findCreatorForType(type);
 
         if(creator != null) {
             return creator.setMapType();
@@ -13,15 +13,15 @@ public class MapTypeCreator {
         }
     }
 
-    public MapTypeCreator findCreatorForType(int type, Map map) {
+    public MapTypeCreator findCreatorForType(int type) {
 
         if(type == 1) {
 
-            return new SafeMapCreator(map);
+            return new SafeMapCreator();
         } else {
             if(type == 2) {
 
-                return new HazardousMapCreator(map);
+                return new HazardousMapCreator();
             }
         }
         return null;
