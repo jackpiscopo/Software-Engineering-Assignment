@@ -69,6 +69,8 @@ public class Game {
 
         map = Map.getInstance();
 
+        int gameMode = 0;
+
         // Asks user for number of players
         do {
             System.out.println("Number of players (2-8): ");
@@ -107,6 +109,16 @@ public class Game {
             System.out.println("Enter a number (1-2): ");
 
             mapType = sc.nextInt();
+
+        } while ((mapType != 1) && (mapType != 2));
+
+        do {
+            System.out.println("Enter game mode: ");
+            System.out.println("1. Regular.");
+            System.out.println("2. Collaborative");
+            System.out.println("Enter a number (1-2): ");
+
+            gameMode = sc.nextInt();
 
         } while ((mapType != 1) && (mapType != 2));
     }
