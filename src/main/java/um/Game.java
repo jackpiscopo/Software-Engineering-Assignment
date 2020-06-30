@@ -19,6 +19,8 @@ public class Game {
 
     private int turns=1;
 
+    private int mapType = 0;
+
     public static void main(String[] args) {
 
         Game game = new Game();
@@ -62,8 +64,6 @@ public class Game {
         Scanner sc = new Scanner(System.in);
 
         int playersCount = 0;
-
-        int mapType = 0;
 
         boolean validAnswer;
 
@@ -113,6 +113,10 @@ public class Game {
         Scanner sc = new Scanner(System.in);
 
         int i=0;
+
+        MapTypeCreator creator = new MapTypeCreator();
+
+        creator.setMapType(mapType, map);
 
         map.setMapSize(mapSize, mapSize);
         map.generate();

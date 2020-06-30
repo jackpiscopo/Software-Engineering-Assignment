@@ -2,7 +2,7 @@ package um;
 
 public interface MapType {
 
-    public String type = null;
+    //public int type = 0;
 
-    public void setMapType();
+    public void setMapType(Map map);
 }
