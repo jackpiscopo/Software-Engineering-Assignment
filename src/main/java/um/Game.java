@@ -63,6 +63,8 @@ public class Game {
 
         int playersCount = 0;
 
+        int mapType = 0;
+
         boolean validAnswer;
 
         // Asks user for number of players
@@ -95,6 +97,16 @@ public class Game {
             validAnswer = setMapSize(mapSize, minMapSize);
 
         } while (!validAnswer);
+
+        do {
+            System.out.println("Enter map type: ");
+            System.out.println("1. Safe.");
+            System.out.println("2. Hazardous.");
+            System.out.println("Enter a number (1-2): ");
+
+            mapType = sc.nextInt();
+
+        } while ((mapType != 1) && (mapType != 2));
     }
 
     public void startGame() {
