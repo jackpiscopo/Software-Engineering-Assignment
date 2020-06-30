@@ -6,6 +6,22 @@ public class Map {
 
     private char[][] mapArray;
 
+    private int maxWaterTiles = 0;
+
+    private static Map instance = null;
+
+    public static Map getInstance() {
+        if(instance == null) {
+            instance = new Map();
+        }
+
+        return instance;
+    }
+
+    private Map() {
+
+    }
+
     public boolean setMapSize(int x, int y) {
         // If x and y are equal and size is valid
         if(x == y && x >=5 && x <= 50) {
@@ -27,15 +43,15 @@ public class Map {
 
             for(i=0;i<size;i++) {
                 for(j=0;j<size;j++) {
-                    // Generates random number from 1 to 10
-                    int randomNumber = (int) (Math.random() * ((10 - 1) + 1) + 1);
+                    // Generates random number from 1 to 100
+                    int randomNumber = (int) (Math.random() * ((100 - 1) + 1) + 1);
 
-                    // If number is between 1 and 7, creates grass tile
-                    if(randomNumber >= 1 && randomNumber <= 7) {
-                        mapArray[i][j] = 'g';
-                    } else {
-                        // If number is between 8 and 10, creates water tile
+                    // If number is between 1 and max water tiles set, creates water tile
+                    if(randomNumber >= 1 && randomNumber <= maxWaterTiles) {
                         mapArray[i][j] = 'w';
+                    } else {
+                        // Else, creates grass tile
+                        mapArray[i][j] = 'g';
                     }
                 }
             }
@@ -53,5 +69,13 @@ public class Map {
 
     public char getTileType(int x, int y) {
         return mapArray[x][y];
+    }
+
+    public void setWaterTileRatio(int maxWaterTiles) {
+        this.maxWaterTiles = maxWaterTiles;
+    }
+
+    public int getMaxWaterTiles() {
+        return maxWaterTiles;
     }
 }
