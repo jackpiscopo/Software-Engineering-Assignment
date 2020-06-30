@@ -8,6 +8,20 @@ public class Map {
 
     private int maxWaterTiles = 0;
 
+    private static Map instance = null;
+
+    public static Map getInstance() {
+        if(instance == null) {
+            instance = new Map();
+        }
+
+        return instance;
+    }
+
+    private Map() {
+
+    }
+
     public boolean setMapSize(int x, int y) {
         // If x and y are equal and size is valid
         if(x == y && x >=5 && x <= 50) {

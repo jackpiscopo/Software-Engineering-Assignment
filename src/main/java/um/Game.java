@@ -13,7 +13,7 @@ public class Game {
 
     private static int mapSize = 0;
 
-    private Map map = new Map();
+    private Map map;
 
     private boolean gameWon = false;
 
@@ -66,6 +66,8 @@ public class Game {
         int playersCount = 0;
 
         boolean validAnswer;
+
+        map = Map.getInstance();
 
         // Asks user for number of players
         do {
