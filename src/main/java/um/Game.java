@@ -19,6 +19,8 @@ public class Game {
 
     private int turns=1;
 
+    private int mapType = 0;
+
     public static void main(String[] args) {
 
         Game game = new Game();
@@ -95,12 +97,26 @@ public class Game {
             validAnswer = setMapSize(mapSize, minMapSize);
 
         } while (!validAnswer);
+
+        do {
+            System.out.println("Enter map type: ");
+            System.out.println("1. Safe.");
+            System.out.println("2. Hazardous.");
+            System.out.println("Enter a number (1-2): ");
+
+            mapType = sc.nextInt();
+
+        } while ((mapType != 1) && (mapType != 2));
     }
 
     public void startGame() {
         Scanner sc = new Scanner(System.in);
 
         int i=0;
+
+        MapTypeCreator creator = new MapTypeCreator();
+
+        creator.setMapType(mapType, map);
 
         map.setMapSize(mapSize, mapSize);
         map.generate();
