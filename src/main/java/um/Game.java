@@ -21,6 +21,12 @@ public class Game {
 
     private int mapType = 0;
 
+    private int numberOfTeams = 0;
+
+    private TeamComposite[] teams;
+
+    private int gameMode = 0;
+
     public static void main(String[] args) {
 
         Game game = new Game();
@@ -100,6 +106,7 @@ public class Game {
 
         } while (!validAnswer);
 
+        // Asks user for map type
         do {
             System.out.println("Enter map type: ");
             System.out.println("1. Safe.");
@@ -109,6 +116,26 @@ public class Game {
             mapType = sc.nextInt();
 
         } while ((mapType != 1) && (mapType != 2));
+
+        // Asks user for game mode
+        do {
+            System.out.println("Enter game mode: ");
+            System.out.println("1. Regular.");
+            System.out.println("2. Collaborative");
+            System.out.println("Enter a number (1-2): ");
+
+            gameMode = sc.nextInt();
+
+        } while ((mapType != 1) && (mapType != 2));
+
+        if(gameMode == 2) {
+            do {
+                System.out.println("Enter number of teams: ");
+                numberOfTeams = sc.nextInt();
+            } while ((numberOfTeams > 1) && (numberOfTeams > players.length));
+
+            //assignTeams();
+        }
     }
 
     public void startGame() {
@@ -118,7 +145,7 @@ public class Game {
 
         MapTypeCreator creator = new MapTypeCreator();
 
-        creator.setMapType(mapType, map);
+        creator.setMapType(mapType);
 
         map.setMapSize(mapSize, mapSize);
         map.generate();
@@ -139,6 +166,15 @@ public class Game {
             players[i].setPosition(position);
             players[i].setUncoveredStartup(mapSize);
             players[i].setStartPosition(position);
+            players[i].setPlayerNum(i+1);
+
+            assignTeams();
+        }
+
+        for(i=0;i<numberOfTeams;i++) {
+            System.out.println("------------------------------------------");
+            System.out.println("Team "+ (i+1) +": ");
+            teams[i].printTeam();
         }
 
         do {
@@ -177,6 +213,11 @@ public class Game {
 
                 //Uncovers next move for every player
                 players[i].setUncovered(nextMoveX, nextMoveY);
+
+                //Uncovers next move for team mates if playing collaborative
+                if(gameMode == 2) {
+                    teams[(players[i].getTeamNum()-1)].setUncovered(nextMoveX, nextMoveY);
+                }
 
                 switch (nextMoveType) {
                     case 'g':
@@ -301,5 +342,54 @@ public class Game {
         System.out.println("HTML game files have been generated.");
         System.out.println("Please find the game files at " + newHTMLFileParent + "\\map_player_n.html");
         System.out.println("Where n is the player number.");
+    }
+
+    public void assignTeams() {
+
+        /*if((players.length % numberOfTeams) == 0) {
+
+        }*/
+        int playersPerTeam = (int) (players.length / numberOfTeams);
+
+        teams = new TeamComposite[numberOfTeams];
+
+        int i=0;
+
+        for(i=0;i<numberOfTeams;i++) {
+            teams[i] = new TeamComposite();
+        }
+
+        for(i=0;i<players.length;i++) {
+            // Generates random number from 1 to numberOfTeams
+            int randomNumber = (int) (Math.random() * ((numberOfTeams - 1) + 1) + 1);
+
+            int teamNumber = randomNumber-1;
+
+            System.out.println("Size: "+teams[teamNumber].size());
+            System.out.println("Players per team: "+playersPerTeam);
+            if (teams[teamNumber].size() < playersPerTeam) {
+                if(players[i] != null) {
+                    players[i].setTeamNum(teamNumber + 1);
+                }
+                teams[teamNumber].addMember(players[i]);
+            } else {
+
+                int smallestTeam = 0;
+
+                int j=0;
+
+                for(j=0;j<numberOfTeams;j++) {
+
+                    if(teams[j].size() < teams[smallestTeam].size()) {
+                        smallestTeam = j;
+                    }
+                }
+
+                if(players[i] != null) {
+                    players[i].setTeamNum(smallestTeam + 1);
+                }
+                teams[smallestTeam].addMember(players[i]);
+            }
+        }
     }
 }

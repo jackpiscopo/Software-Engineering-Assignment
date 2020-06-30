@@ -2,13 +2,17 @@ package um;
 
 import java.lang.*;
 
-public class Player {
+public class Player implements Participant {
     private Position position = new Position();
     private Position nextMove = new Position();
     private Position startPosition = new Position();
     private boolean winner = false;
 
     private boolean[][] uncovered;
+
+    private int playerNum = 0;
+
+    private int teamNum = 0;
 
     public void setPosition(Position p) {
         position = p;
@@ -104,5 +108,25 @@ public class Player {
 
     public boolean getWinner() {
         return winner;
+    }
+
+    public void setPlayerNum(int num) {
+        playerNum = num;
+    }
+
+    public int getPlayerNum() {
+        return playerNum;
+    }
+
+    public void printTeam() {
+        System.out.println("Player "+ playerNum);
+    }
+
+    public void setTeamNum(int num) {
+        teamNum = num;
+    }
+
+    public int getTeamNum() {
+        return teamNum;
     }
 }

@@ -8,7 +8,7 @@ public class MapTypeCreatorTest extends TestCase {
         Map map;
         map = Map.getInstance();
         MapTypeCreator creator = new MapTypeCreator();
-        creator.setMapType(1, map);
+        creator.setMapType(1);
         int maxWaterTiles = map.getMaxWaterTiles();
         assertTrue(maxWaterTiles <= 10);
     }
@@ -17,7 +17,7 @@ public class MapTypeCreatorTest extends TestCase {
         Map map;
         map = Map.getInstance();
         MapTypeCreator creator = new MapTypeCreator();
-        creator.setMapType(2, map);
+        creator.setMapType(2);
         int maxWaterTiles = map.getMaxWaterTiles();
         assertTrue((maxWaterTiles >= 25) && (maxWaterTiles <= 35));
     }
@@ -26,29 +26,27 @@ public class MapTypeCreatorTest extends TestCase {
         Map map;
         map = Map.getInstance();
         MapTypeCreator creator = new MapTypeCreator();
-        creator.setMapType(0, map);
-        int maxWaterTiles = map.getMaxWaterTiles();
-        assertEquals(0, maxWaterTiles);
+        assertNull(creator.setMapType(0));
     }
 
     public void testFindCreatorForTypeForSafeMap() {
         Map map;
         map = Map.getInstance();
         MapTypeCreator creator = new MapTypeCreator();
-        assertNotNull(creator.findCreatorForType(1, map));
+        assertNotNull(creator.findCreatorForType(1));
     }
 
     public void testFindCreatorForTypeForHazardousMap() {
         Map map;
         map = Map.getInstance();
         MapTypeCreator creator = new MapTypeCreator();
-        assertNotNull(creator.findCreatorForType(2, map));
+        assertNotNull(creator.findCreatorForType(2));
     }
 
     public void testFindCreatorForTypeForInvalidMap() {
         Map map;
         map = Map.getInstance();
         MapTypeCreator creator = new MapTypeCreator();
-        assertNull(creator.findCreatorForType(0, map));
+        assertNull(creator.findCreatorForType(0));
     }
 }
